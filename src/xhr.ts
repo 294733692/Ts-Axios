@@ -3,7 +3,7 @@ import { parseHeaders } from './helpers/headers'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   // 返回promise类型
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const { data = null, url, method = 'get', headers, responseType } = config
 
     const request = new XMLHttpRequest()
@@ -14,6 +14,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
     request.open(method.toUpperCase(), url, true)
 
+    // 请求成功
     request.onreadystatechange = function handleLoad() {
       // 判断请求状态是否成功
       if (request.readyState !== 4) {
@@ -32,6 +33,11 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         request
       }
       resolve(responseHeaders)
+    }
+
+    // 请求失败回调,网络错误处理
+    request.onerror = function handleError() {
+      reject(new Error('Network Error'))
     }
 
     // 设置header请求头
