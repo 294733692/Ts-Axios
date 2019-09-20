@@ -1,5 +1,5 @@
 // url相关的辅助函数
-import { isDate, isObject } from './util'
+import { isDate, isplainObject } from './util'
 
 // 转化encode，将特殊字符转化回来
 function encode(val: string): string {
@@ -42,7 +42,7 @@ export function buildURL(url: string, params?: any): string {
     values.forEach(val => {
       if (isDate(val)) {
         val = val.toISOString()
-      } else if (isObject(val)) {
+      } else if (isplainObject(val)) {
         val = JSON.stringify(val)
       }
       // 添加键值对
