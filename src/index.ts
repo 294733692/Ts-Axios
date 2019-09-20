@@ -1,13 +1,16 @@
-import { AxiosPromise, AxiosRequestConfig } from './types'
+import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from './types'
 import xhr from './xhr'
 import { buildURL } from './helpers/url'
-import { transforRequest } from './helpers/data'
+import { transforRequest, transforResponse } from './helpers/data'
 import { processHeaders } from './helpers/headers'
 
 function axios(config: AxiosRequestConfig): AxiosPromise {
   // TODO
   precessConfig(config)
-  return xhr(config)
+  return xhr(config).then(res => {
+    // 对响应数据responseData进行处理，转化为JSON格式
+    return transforResponseData(res)
+  })
 }
 
 // 处理config参数
@@ -32,6 +35,12 @@ function transforRequestData(config: AxiosRequestConfig): any {
 function transforHeaders(config: AxiosRequestConfig): any {
   const { headers = {}, data } = config
   return processHeaders(headers, data)
+}
+
+// 处理响应response数据
+function transforResponseData(res: AxiosResponse): AxiosResponse {
+  res.data = transforResponse(res.data)
+  return res
 }
 
 export default axios
