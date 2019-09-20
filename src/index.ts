@@ -1,13 +1,13 @@
-import { AxiosRequestConfig } from './types'
+import { AxiosPromise, AxiosRequestConfig } from './types'
 import xhr from './xhr'
 import { buildURL } from './helpers/url'
 import { transforRequest } from './helpers/data'
 import { processHeaders } from './helpers/headers'
 
-function axios(config: AxiosRequestConfig): void {
+function axios(config: AxiosRequestConfig): AxiosPromise {
   // TODO
   precessConfig(config)
-  xhr(config)
+  return xhr(config)
 }
 
 // 处理config参数
