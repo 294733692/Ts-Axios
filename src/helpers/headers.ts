@@ -25,3 +25,26 @@ export function processHeaders(headers: any, data: any): any {
 
   return headers
 }
+
+// 处理响应headers
+export function parseHeaders(headers: string): any {
+  let parsed = Object.create(null)
+  if (!headers) {
+    return parsed
+  }
+  headers.split('\r\n').forEach(line => {
+    // line 数据结构为“Content-Type: json”的形式
+    let [key, value] = line.split(':')
+
+    key = key.trim().toLowerCase()
+    if (!key) {
+      return
+    }
+    if (value) {
+      value = value.trim()
+    }
+
+    parsed[key] = value
+  })
+  return parsed
+}
