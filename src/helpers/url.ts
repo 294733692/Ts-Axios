@@ -20,14 +20,14 @@ export function buildURL(url: string, params?: any): string {
   // 处理hash后面的参数
   // 拼接url
   if (!params) {
-    return params
+    return url
   }
   const parts: string[] = []
 
   Object.keys(params).forEach(key => {
     const val = params[key]
     // 如果val为空，直接终止本次循环
-    if (val === null || typeof val === 'undefined') {
+    if (val == null || typeof val === 'undefined') {
       return
     }
     let values = [] // val 可能为Array或Object，临时数组val，统一处理
@@ -58,7 +58,7 @@ export function buildURL(url: string, params?: any): string {
       // 存在，截取
       url = url.slice(0, markIndex)
     }
-    url = (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
   }
 
   return url
