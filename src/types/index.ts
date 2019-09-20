@@ -14,6 +14,7 @@ export type Method =
   | 'patch'
   | 'PATCH'
 
+// 请求头接口类型
 export interface AxiosRequestConfig {
   url: string
   method?: Method
