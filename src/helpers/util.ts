@@ -14,6 +14,6 @@ export function isObject(val: any): val is Object {
 }
 
 // 判断是否是普通对象，返回值使用ts类型保护
-export function isplainObject(val: any): val is Object {
+export function isPlainObject(val: any): val is Object {
   return toString.call(val) === '[object Object]'
 }

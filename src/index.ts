@@ -2,6 +2,7 @@ import { AxiosRequestConfig } from './types'
 import xhr from './xhr'
 import { buildURL } from './helpers/url'
 import { transforRequest } from './helpers/data'
+import { processHeaders } from './helpers/headers'
 
 function axios(config: AxiosRequestConfig): void {
   // TODO
@@ -12,6 +13,7 @@ function axios(config: AxiosRequestConfig): void {
 // 处理config参数
 function precessConfig(config: AxiosRequestConfig): void {
   config.url = transformURL(config)
+  config.headers = transforHeaders(config)
   config.data = transforRequestData(config)
 }
 
@@ -21,8 +23,15 @@ function transformURL(config: AxiosRequestConfig): string {
   return buildURL(url, params)
 }
 
+// 处理config.data
 function transforRequestData(config: AxiosRequestConfig): any {
   return transforRequest(config.data)
+}
+
+// 处理请求头部config.header
+function transforHeaders(config: AxiosRequestConfig): any {
+  const { headers = {}, data } = config
+  return processHeaders(headers, data)
 }
 
 export default axios
