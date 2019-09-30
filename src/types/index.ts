@@ -62,7 +62,7 @@ export interface Axios {
 
   put(url: string, data: any, config?: AxiosRequestConfig): AxiosPromise
 
-  pacth(url: string, data: any, config?: AxiosRequestConfig): AxiosPromise
+  patch(url: string, data: any, config?: AxiosRequestConfig): AxiosPromise
 }
 
 // 混合对象类型接口
