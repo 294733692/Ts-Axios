@@ -1,46 +1,16 @@
-import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from './types'
-import xhr from './core/xhr'
-import { buildURL } from './helpers/url'
-import { transforRequest, transforResponse } from './helpers/data'
-import { processHeaders } from './helpers/headers'
+import { AxiosInstance } from './types'
+import Axios from './core/Axios'
+import { extend } from './helpers/util'
 
-function axios(config: AxiosRequestConfig): AxiosPromise {
-  // TODO
-  precessConfig(config)
-  return xhr(config).then(res => {
-    // 对响应数据responseData进行处理，转化为JSON格式
-    return transforResponseData(res)
-  })
+// 通过工厂方法创建axios请求
+function createInstance(): AxiosInstance {
+  const context = new Axios() // 实例化axios
+  const instance = Axios.prototype.request.bind(context) // 将instance绑定到Axios原型上，request函数会调用this，绑定上下文this指向
+  extend(instance, context) // 将conext上的原型属性和实例属性全部拷贝到instance上
+
+  return instance as AxiosInstance
 }
 
-// 处理config参数
-function precessConfig(config: AxiosRequestConfig): void {
-  config.url = transformURL(config)
-  config.headers = transforHeaders(config)
-  config.data = transforRequestData(config)
-}
-
-// 处理config的url做处理
-function transformURL(config: AxiosRequestConfig): string {
-  const { url, params } = config
-  return buildURL(url, params)
-}
-
-// 处理config.data
-function transforRequestData(config: AxiosRequestConfig): any {
-  return transforRequest(config.data)
-}
-
-// 处理请求头部config.header
-function transforHeaders(config: AxiosRequestConfig): any {
-  const { headers = {}, data } = config
-  return processHeaders(headers, data)
-}
-
-// 处理响应response数据
-function transforResponseData(res: AxiosResponse): AxiosResponse {
-  res.data = transforResponse(res.data)
-  return res
-}
+const axios = createInstance()
 
 export default axios
