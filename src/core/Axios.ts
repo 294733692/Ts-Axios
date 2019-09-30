@@ -2,7 +2,18 @@ import { AxiosPromise, AxiosRequestConfig, Method } from '../types'
 import dispatchRequest from './dispatchRequest'
 
 export default class Axios {
-  request(config: AxiosRequestConfig): AxiosPromise {
+  request(url: any, config?: any): AxiosPromise {
+    // 支持接口类型AxiosInstance第二种，参数变为any，在运行的时候做判断
+    if (typeof url === 'string') {
+      // 传入url，满足接口类型第二种类型
+      if (!config) {
+        config = {}
+      }
+      config.url = url
+    } else {
+      // 未传入url，满足接口类型第一种类型
+      config = url
+    }
     return dispatchRequest(config)
   }
 

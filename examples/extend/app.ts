@@ -8,21 +8,30 @@ axios({
   }
 })
 
-axios.request({
-  url: '/extend/post',
+axios('/extend/post',{
   method: 'post',
   data: {
-    msg: 'hello'
+    msg: 'hhh'
   }
 })
 
-axios.get('/extend/get')
-axios.options('/extend/options')
-axios.delete('/extend/delete')
-axios.head('/extend/head')
-axios.post('/extend/post', {mas: 'post'})
-axios.put('/extend/put', {mas: 'put'})
-axios.patch('/extend/patch', {mas: 'patch'})
+// axios.request({
+//   url: '/extend/post',
+//   method: 'post',
+//   data: {
+//     msg: 'hello'
+//   }
+// })
+//
+// axios.get('/extend/get')
+// axios.options('/extend/options')
+// axios.delete('/extend/delete')
+// axios.head('/extend/head')
+// axios.post('/extend/post', {mas: 'post'})
+// axios.put('/extend/put', {mas: 'put'})
+// axios.patch('/extend/patch', {mas: 'patch'})
+
+
 
 // import axios from '../../src/index'
 //
