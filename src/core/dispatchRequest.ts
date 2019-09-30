@@ -1,10 +1,10 @@
-import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from './types'
-import xhr from './core/xhr'
-import { buildURL } from './helpers/url'
-import { transforRequest, transforResponse } from './helpers/data'
-import { processHeaders } from './helpers/headers'
+import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from '../types'
+import xhr from './xhr'
+import { buildURL } from '../helpers/url'
+import { transforRequest, transforResponse } from '../helpers/data'
+import { processHeaders } from '../helpers/headers'
 
-function axios(config: AxiosRequestConfig): AxiosPromise {
+export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   // TODO
   precessConfig(config)
   return xhr(config).then(res => {
@@ -23,7 +23,7 @@ function precessConfig(config: AxiosRequestConfig): void {
 // 处理config的url做处理
 function transformURL(config: AxiosRequestConfig): string {
   const { url, params } = config
-  return buildURL(url, params)
+  return buildURL(url!, params) // buildURL url是必选参数，可能传入为空， 类型断言url不为空
 }
 
 // 处理config.data
@@ -42,5 +42,3 @@ function transforResponseData(res: AxiosResponse): AxiosResponse {
   res.data = transforResponse(res.data)
   return res
 }
-
-export default axios
