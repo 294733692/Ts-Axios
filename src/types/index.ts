@@ -35,7 +35,8 @@ export interface AxiosResponse<T = any> {
   request: any
 }
 
-export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {}
+export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {
+}
 
 // 扩展Error接口
 export interface AxiosError extends Error {
@@ -71,4 +72,19 @@ export interface AxiosInstance extends Axios {
 
   // 函数重载, 支持axios(url, config)类型
   (url: string, config?: AxiosRequestConfig): AxiosPromise
+}
+
+// 拦截器管理类对外泛型接口
+export interface AxiosInterceptorManager<T> {
+  use(resolved: ResolvedFn<T>, rejected: RejectedFn): number  // 创建拦截器返回一个ID，
+
+  eject(id: null): void  // 删除拦截器传入ID就可以了
+}
+
+export interface ResolvedFn<T> {
+  (val: T): T | Promise<T>
+}
+
+export interface RejectedFn {
+  (error: any): any
 }
