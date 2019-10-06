@@ -32,7 +32,7 @@ export default class InterceptorManager<T> {
 
   eject(id: number): void {
     if (this.interceptors[id]) {
-      this.interceptors[id] = []
+      this.interceptors[id] = null
     }
   }
 }

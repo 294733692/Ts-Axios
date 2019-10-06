@@ -78,7 +78,7 @@ export interface AxiosInstance extends Axios {
 export interface AxiosInterceptorManager<T> {
   use(resolved: ResolvedFn<T>, rejected: RejectedFn): number  // 创建拦截器返回一个ID，
 
-  eject(id: null): void  // 删除拦截器传入ID就可以了
+  eject(id: number): void  // 删除拦截器传入ID就可以了
 }
 
 export interface ResolvedFn<T> {
