@@ -1,9 +1,17 @@
-import {AxiosPromise, AxiosRequestConfig, AxiosResponse, Method, RejectedFn, ResolvedFn} from '../types'
+import {
+  AxiosPromise,
+  AxiosRequestConfig,
+  AxiosResponse,
+  Method,
+  RejectedFn,
+  ResolvedFn
+} from '../types'
 import dispatchRequest from './dispatchRequest'
-import interceptorManager from "./interceptorManager";
+import interceptorManager from './interceptorManager'
+import defaults from '../defaults'
 
 interface Interceptors {
-  request: interceptorManager<AxiosRequestConfig>,
+  request: interceptorManager<AxiosRequestConfig>
   response: interceptorManager<AxiosResponse>
 }
 
@@ -13,9 +21,11 @@ interface PromiseChain<T> {
 }
 
 export default class Axios {
+  defaults: AxiosRequestConfig
   interceptors: Interceptors
 
-  constructor() {
+  constructor(initConfig: AxiosRequestConfig) {
+    this.defaults = initConfig
     this.interceptors = {
       // 用户自己添加拦截器，例如this.interceptors.request/response.use
       request: new interceptorManager<AxiosRequestConfig>(),
@@ -37,10 +47,13 @@ export default class Axios {
     }
 
     // 定义request链
-    const chain: PromiseChain<any>[] = [{  // 用于存放一堆拦截器和初始值
-      resolved: dispatchRequest,
-      rejected: undefined
-    }]
+    const chain: PromiseChain<any>[] = [
+      {
+        // 用于存放一堆拦截器和初始值
+        resolved: dispatchRequest,
+        rejected: undefined
+      }
+    ]
 
     // 添加request拦截器
     this.interceptors.request.forEach(interceptor => {
@@ -57,7 +70,7 @@ export default class Axios {
     let promise = Promise.resolve(config)
 
     while (chain.length) {
-      const {resolved, rejected} = chain.shift()!  // chain.shift可能为promise.chain类型，也可能为空，类型断言shift不为空
+      const { resolved, rejected } = chain.shift()! // chain.shift可能为promise.chain类型，也可能为空，类型断言shift不为空
       promise = promise.then(resolved, rejected)
     }
 

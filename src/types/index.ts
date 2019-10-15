@@ -23,6 +23,8 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType // typeScript内部自定义类型，"" | "arraybuffer" | "blob" | "document" | "json" | "text"
   timeout?: number
+
+  [propName: string]: any
 }
 
 // 返回接口类型
@@ -35,8 +37,7 @@ export interface AxiosResponse<T = any> {
   request: any
 }
 
-export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {
-}
+export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {}
 
 // 扩展Error接口
 export interface AxiosError extends Error {
@@ -49,9 +50,9 @@ export interface AxiosError extends Error {
 
 // axios公共方法，扩展接口类型
 export interface Axios {
-
+  defaults: AxiosRequestConfig
   interceptors: {
-    request: AxiosInterceptorManager<AxiosRequestConfig>,
+    request: AxiosInterceptorManager<AxiosRequestConfig>
     response: AxiosInterceptorManager<AxiosResponse>
   }
 
@@ -82,9 +83,9 @@ export interface AxiosInstance extends Axios {
 
 // 拦截器管理类对外泛型接口
 export interface AxiosInterceptorManager<T> {
-  use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number  // 创建拦截器返回一个ID，
+  use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number // 创建拦截器返回一个ID，
 
-  eject(id: number): void  // 删除拦截器传入ID就可以了
+  eject(id: number): void // 删除拦截器传入ID就可以了
 }
 
 export interface ResolvedFn<T> {
