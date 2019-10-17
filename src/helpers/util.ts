@@ -1,5 +1,7 @@
 // 工具方法、辅助函数
 
+import { Method } from '../types'
+
 const toString = Object.prototype.toString
 
 // 判断是否是日期, 返回值使用ts类型保护

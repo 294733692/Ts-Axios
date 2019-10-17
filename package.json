@@ -124,5 +124,10 @@
     "tslint-loader": "^3.5.4",
     "express": "^4.16.4",
     "body-parser": "^1.18.3"
+  },
+  "dependencies": {
+    "@types/qs": "^6.5.3",
+    "express": "^4.17.1",
+    "qs": "^6.9.0"
   }
 }

@@ -3,8 +3,9 @@ import { deepMerge, isPlainObject } from '../helpers/util'
 
 const strats = Object.create(null) // stratsMap
 
+// 默认合并策略
 function defaultStrat(val1: any, val2: any): any {
-  return typeof val2 === 'undefined' ? val2 : val1
+  return typeof val2 !== 'undefined' ? val2 : val1
 }
 
 function fromVal2Strat(val1: any, val2: any): any {
@@ -32,7 +33,7 @@ stratKeysFromVal2.forEach(key => {
   strats[key] = fromVal2Strat
 })
 
-const stratKeysDeepMerge = ['header']
+const stratKeysDeepMerge = ['headers']
 stratKeysDeepMerge.forEach(key => {
   strats[key] = deepMergeStrat
 })
@@ -62,7 +63,7 @@ export default function mergeConfig(
   function mergeField(key: string): void {
     // 通过key去拿到相应的合并策略函数
     const strat = strats[key] || defaultStrat
-    config[key] = strat[(config1[key], config2![key])]
+    config[key] = strat(config1[key], config2![key])
   }
 
   return config
