@@ -17,7 +17,7 @@ export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromis
 // 处理config参数
 function precessConfig(config: AxiosRequestConfig): void {
   config.url = transformURL(config)
-  config.data = transform(config.data, config.headers, config.transformRequest)
+  config.data = transform(config.data, config.headers, config.transformRequest!)
   config.headers = flattenHeaders(config.headers, config.method!)
 }
 
@@ -29,6 +29,6 @@ function transformURL(config: AxiosRequestConfig): string {
 
 // 处理响应response数据
 function transforResponseData(res: AxiosResponse): AxiosResponse {
-  res.data = transform(res.data, res.headers, res.config.transformResponse)
+  res.data = transform(res.data, res.headers, res.config.transformResponse!)
   return res
 }
