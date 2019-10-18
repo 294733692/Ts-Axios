@@ -16,7 +16,7 @@ axios.defaults.headers.common['test2'] = 123
 //   console.log(res.data)
 // })
 
-axios({
+const instance = axios.create({
   transformRequest: [(function(data) {
     return qs.stringify(data)
     // return data
@@ -26,7 +26,10 @@ axios({
       data.b = 2
     }
     return data
-  }],
+  }]
+})
+
+instance({
   url: '/config/post',
   method: 'post',
   data: {
