@@ -7,6 +7,7 @@ import transform from './transform'
 
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   // TODO
+  throwIFCancellationRequest(config)
   precessConfig(config)
   return xhr(config).then(res => {
     // 对响应数据responseData进行处理，转化为JSON格式
@@ -31,4 +32,11 @@ function transformURL(config: AxiosRequestConfig): string {
 function transforResponseData(res: AxiosResponse): AxiosResponse {
   res.data = transform(res.data, res.headers, res.config.transformResponse!)
   return res
+}
+
+// 检查cancelToken是否使用过，已经使用过cancelToken，不能再次发送请求
+function throwIFCancellationRequest(config: AxiosRequestConfig): void {
+  if (config.cancelToken) {
+    config.cancelToken.throwIFRequested()
+  }
 }

@@ -25,6 +25,12 @@ export default class CancelToken {
     })
   }
 
+  throwIFRequested() {
+    if (this.reason) {
+      throw this.reason
+    }
+  }
+
   static source(): CancelTokenSource {
     let cancel!: Canceler // 断言cancel不为空，typeScript检测不到C的返回类型
     const token = new CancelToken(c => {
