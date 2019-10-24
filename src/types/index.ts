@@ -25,6 +25,7 @@ export interface AxiosRequestConfig {
   timeout?: number
   transformRequest?: AxiosTransformer | AxiosTransformer[]
   transformResponse?: AxiosTransformer | AxiosTransformer[]
+  cancelToken?: CancelToken
 
   [propName: string]: any
 }
@@ -105,4 +106,19 @@ export interface RejectedFn {
 
 export interface AxiosTransformer {
   (data: any, headers?: any): any
+}
+
+export interface CancelToken {
+  promise: Promise<string>
+  reason?: string // 代表Promise Resolved函数的参数
+}
+
+// 取消方法接口
+export interface Canceler {
+  (message?: string): void // 取消返回的信息
+}
+
+// 传给CancelToken的参数类型
+export interface CancelExecutor {
+  (cancel: Canceler): void
 }
