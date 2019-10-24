@@ -1,8 +1,7 @@
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from '../types'
 import xhr from './xhr'
 import { buildURL } from '../helpers/url'
-import { transforRequest, transforResponse } from '../helpers/data'
-import { flattenHeaders, processHeaders } from '../helpers/headers'
+import { flattenHeaders } from '../helpers/headers'
 import transform from './transform'
 
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
@@ -37,6 +36,6 @@ function transforResponseData(res: AxiosResponse): AxiosResponse {
 // 检查cancelToken是否使用过，已经使用过cancelToken，不能再次发送请求
 function throwIFCancellationRequest(config: AxiosRequestConfig): void {
   if (config.cancelToken) {
-    config.cancelToken.throwIFRequested()
+    config.cancelToken.throwIfRequested()
   }
 }
