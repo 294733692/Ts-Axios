@@ -122,3 +122,15 @@ export interface Canceler {
 export interface CancelExecutor {
   (cancel: Canceler): void
 }
+
+export interface CancelTokenSource {
+  token: CancelToken
+  cancel: Canceler
+}
+
+// CancelToken的类类型
+export interface CancelTokenStatic {
+  new (Executor: CancelExecutor): CancelToken
+
+  source(): CancelTokenSource
+}
