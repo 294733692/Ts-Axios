@@ -20,6 +20,11 @@ export function isPlainObject(val: any): val is Object {
   return toString.call(val) === '[object Object]'
 }
 
+// 判断类型是否是FormData类型，返回值使用ts类型保护
+export function isFormData(val: any): val is FormData {
+  return typeof val !== 'undefined' && val instanceof FormData
+}
+
 // 混合对象拷贝
 export function extend<T, U>(to: T, from: U): T & U {
   for (const key in from) {
