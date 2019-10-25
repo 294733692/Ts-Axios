@@ -1,6 +1,11 @@
 // url相关的辅助函数
 import { isDate, isPlainObject } from './util'
 
+interface URLOrigin {
+  protocol: string
+  host: string
+}
+
 // 转化encode，将特殊字符转化回来
 function encode(val: string): string {
   return encodeURIComponent(val)
@@ -62,4 +67,30 @@ export function buildURL(url: string, params?: any): string {
   }
 
   return url
+}
+
+/**
+ * 判断url是否同源
+ * 1、协议
+ * 2、域名
+ */
+export function isURLSameOrigin(requestUrl: string): boolean {
+  const parsedOrigin = resolveUrl(requestUrl)
+
+  return (
+    parsedOrigin.protocol === currentOrigin.protocol && parsedOrigin.host === currentOrigin.host
+  )
+}
+
+const urlParsingNode = document.createElement('a')
+const currentOrigin = resolveUrl(window.location.href)
+
+function resolveUrl(url: string): URLOrigin {
+  urlParsingNode.setAttribute('href', url)
+
+  const { protocol, host } = urlParsingNode
+  return {
+    protocol,
+    host
+  }
 }
