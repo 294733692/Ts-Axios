@@ -1,10 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+// const multipart = require('connect-multiparty')
+const atob = require('atob')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
+const path = require('path')
 
 require('./server2')
 
@@ -21,12 +24,18 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler))
 
-app.use(express.static(__dirname))
+app.use(express.static(__dirname, {
+  setHeaders (res) {
+    res.cookie('XSRF-TOKEN-D', '1234abc')
+  }
+}))
 
 app.use(bodyParser.json())
 // app.use(bodyParser.text())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
+
+
 
 const router = express.Router()
 
@@ -53,7 +62,7 @@ module.exports = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
 })
 
-function registerSimpleRouter() {
+function registerSimpleRouter () {
   router.get('/simple/get', function(req, res) {
     res.json({
       msg: `hello world`
@@ -61,7 +70,7 @@ function registerSimpleRouter() {
   })
 }
 
-function registerBaseRouter() {
+function registerBaseRouter () {
   router.get('/base/get', function(req, res) {
     res.json(req.query)
   })
@@ -84,7 +93,7 @@ function registerBaseRouter() {
   })
 }
 
-function registerErrorRouter() {
+function registerErrorRouter () {
   router.get('/error/get', function(req, res) {
     if (Math.random() > 0.5) {
       res.json({
@@ -105,7 +114,7 @@ function registerErrorRouter() {
   })
 }
 
-function registerExtendRouter() {
+function registerExtendRouter () {
   router.get('/extend/get', function(req, res) {
     res.json({
       msg: 'hello world'
@@ -148,19 +157,19 @@ function registerExtendRouter() {
   })
 }
 
-function registerInterceptorRouter() {
+function registerInterceptorRouter () {
   router.get('/interceptor/get', function(req, res) {
     res.end('hello')
   })
 }
 
-function registerConfigRouter() {
+function registerConfigRouter () {
   router.post('/config/post', function(req, res) {
     res.json(req.body)
   })
 }
 
-function registerCancelRouter() {
+function registerCancelRouter () {
   router.get('/cancel/get', function(req, res) {
     setTimeout(() => {
       res.json('hello')

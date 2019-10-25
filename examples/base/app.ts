@@ -12,17 +12,6 @@ import axios from '../../src/index'
 //   method: 'get',
 //   url: '/base/get',
 //   params: {
-//     food: [
-//       { id: 1, name: 'food1' },
-//       { id: 2, name: 'food2' }
-//     ]
-//   }
-// })
-//
-// axios({
-//   method: 'get',
-//   url: '/base/get',
-//   params: {
 //     foo: {
 //       bar: 'baz'
 //     }
@@ -72,23 +61,6 @@ import axios from '../../src/index'
 //   }
 // })
 //
-//
-// axios({
-//   method: 'post',
-//   url: '/base/post',
-//   data: {
-//     a: 1,
-//     b: 2
-//   }
-// })
-//
-// const arr = new Int32Array([21.32])
-// axios({
-//   method: 'post',
-//   url: '/base/buffer',
-//   data: arr
-// })
-//
 // axios({
 //   method: 'post',
 //   url: '/base/post',
@@ -102,14 +74,22 @@ import axios from '../../src/index'
 //   method: 'post',
 //   url: '/base/post',
 //   headers: {
-//     'content-type': 'application/json',
-//     'Accept': 'application/json, text/plain, */*'
+//     'content-type': 'application/json;charset=utf-8'
 //   },
 //   data: {
 //     a: 1,
 //     b: 2
 //   }
 // })
+//
+// const arr = new Int32Array([21, 31])
+//
+// axios({
+//   method: 'post',
+//   url: '/base/buffer',
+//   data: arr
+// })
+//
 //
 // const paramsString = 'q=URLUtils.searchParams&topic=api'
 // const searchParams = new URLSearchParams(paramsString)
@@ -119,7 +99,6 @@ import axios from '../../src/index'
 //   url: '/base/post',
 //   data: searchParams
 // })
-
 
 axios({
   method: 'post',

@@ -17,19 +17,15 @@ const cors = {
   'Access-Control-Allow-Headers': 'Content-Type'
 }
 
-router.get('/more/server2', function(req, res) {
-  res.set(cors)
-  res.end()
-})
 router.post('/more/server2', function(req, res) {
   res.set(cors)
   res.json(req.cookies)
 })
 
-// router.options('/more/server2', function(req, res) {
-//   res.set(cors)
-//   res.end()
-// })
+router.options('/more/server2', function(req, res) {
+  res.set(cors)
+  res.end()
+})
 
 app.use(router)
 

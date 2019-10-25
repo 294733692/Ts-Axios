@@ -14,13 +14,11 @@ axios.get('/cancel/get', {
 setTimeout(() => {
   source.cancel('Operation canceled by the user.')
 
-  setTimeout(() => {
-    axios.post('/cancel/post', { a: 1 }, { cancelToken: source.token }).catch(function(e) {
-      if (axios.isCancel(e)) {
-        console.log(e.message)
-      }
-    })
-  }, 100)
+  axios.post('/cancel/post', { a: 1 }, { cancelToken: source.token }).catch(function(e) {
+    if (axios.isCancel(e)) {
+      console.log(e.message)
+    }
+  })
 }, 100)
 
 let cancel: Canceler
@@ -37,4 +35,4 @@ axios.get('/cancel/get', {
 
 setTimeout(() => {
   cancel()
-}, 1500)
+}, 200)
