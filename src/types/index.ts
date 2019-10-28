@@ -83,6 +83,8 @@ export interface Axios {
   put<T = any>(url: string, data: any, config?: AxiosRequestConfig): AxiosPromise<T>
 
   patch<T = any>(url: string, data: any, config?: AxiosRequestConfig): AxiosPromise<T>
+
+  getUrl(config?: AxiosRequestConfig): string
 }
 
 // 混合对象类型接口
@@ -93,6 +95,10 @@ export interface AxiosInstance extends Axios {
   (url: string, config?: AxiosRequestConfig): AxiosPromise
 }
 
+export interface AxiosClassStatic {
+  new (config: AxiosRequestConfig): Axios
+}
+
 // 扩展create静态方法
 export interface AxiosStatic extends AxiosInstance {
   create(config?: AxiosRequestConfig): AxiosInstance
@@ -100,6 +106,12 @@ export interface AxiosStatic extends AxiosInstance {
   CancelToken: CancelTokenStatic
   Cancel: CancelStatic
   isCancel: (value: any) => boolean
+
+  all<T>(promise: Array<T | Promise<T>>): Promise<T[]>
+
+  spread<T, R>(callback: (...args: T[]) => R): (arr: T[]) => R
+
+  Axios: AxiosClassStatic
 }
 
 // 拦截器管理类对外泛型接口

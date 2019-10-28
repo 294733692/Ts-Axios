@@ -22,7 +22,7 @@ function precessConfig(config: AxiosRequestConfig): void {
 }
 
 // 处理config的url做处理
-function transformURL(config: AxiosRequestConfig): string {
+export function transformURL(config: AxiosRequestConfig): string {
   let { url, params, paramsSerializer, baseURL } = config
 
   // 看是否配置baseURL，不是绝对路径，就和url做拼接，返回绝对路径
