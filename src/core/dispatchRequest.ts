@@ -23,8 +23,8 @@ function precessConfig(config: AxiosRequestConfig): void {
 
 // 处理config的url做处理
 function transformURL(config: AxiosRequestConfig): string {
-  const { url, params } = config
-  return buildURL(url!, params) // buildURL url是必选参数，可能传入为空， 类型断言url不为空
+  const { url, params, paramsSerializer } = config
+  return buildURL(url!, params, paramsSerializer) // buildURL url是必选参数，可能传入为空， 类型断言url不为空
 }
 
 // 处理响应response数据
