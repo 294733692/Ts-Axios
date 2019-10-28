@@ -1,6 +1,6 @@
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from '../types'
 import xhr from './xhr'
-import { buildURL } from '../helpers/url'
+import { buildURL, combineURL, isAbsoluteURL } from '../helpers/url'
 import { flattenHeaders } from '../helpers/headers'
 import transform from './transform'
 
@@ -23,7 +23,12 @@ function precessConfig(config: AxiosRequestConfig): void {
 
 // 处理config的url做处理
 function transformURL(config: AxiosRequestConfig): string {
-  const { url, params, paramsSerializer } = config
+  let { url, params, paramsSerializer, baseURL } = config
+
+  // 看是否配置baseURL，不是绝对路径，就和url做拼接，返回绝对路径
+  if (baseURL && !isAbsoluteURL(url!)) {
+    url = combineURL(baseURL, url)
+  }
   return buildURL(url!, params, paramsSerializer) // buildURL url是必选参数，可能传入为空， 类型断言url不为空
 }
 

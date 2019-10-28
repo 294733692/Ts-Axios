@@ -84,6 +84,15 @@ export function buildURL(
   return url
 }
 
+// 判断url是否是绝对地址
+export function isAbsoluteURL(url: string): boolean {
+  return /(^[a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
+}
+
+export function combineURL(baseURL: string, relativeRUL?: string): string {
+  return relativeRUL ? baseURL.replace(/\/+$/, '') + '/' + relativeRUL.replace(/^\/+/, '') : baseURL
+}
+
 /**
  * 判断url是否同源
  * 1、协议
