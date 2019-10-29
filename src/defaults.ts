@@ -1,7 +1,7 @@
 // 默认配置
 import { AxiosRequestConfig } from './types'
 import { processHeaders } from './helpers/headers'
-import { transforRequest, transforResponse } from './helpers/data'
+import { transformRequest, transformResponse } from './helpers/data'
 
 const defaults: AxiosRequestConfig = {
   method: 'GET',
@@ -17,13 +17,13 @@ const defaults: AxiosRequestConfig = {
   transformRequest: [
     function(data: any, headers: any): any {
       processHeaders(headers, data)
-      return transforRequest(data)
+      return transformRequest(data)
     }
   ],
 
   transformResponse: [
     function(data: any): any {
-      return transforResponse(data)
+      return transformResponse(data)
     }
   ],
 

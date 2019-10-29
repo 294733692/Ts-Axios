@@ -1,7 +1,7 @@
 import { isPlainObject } from './util'
 
 // 处理data，将其转化为字符串对象形式
-export function transforRequest(data: any): any {
+export function transformRequest(data: any): any {
   if (isPlainObject(data)) {
     return JSON.stringify(data)
   }
@@ -9,7 +9,7 @@ export function transforRequest(data: any): any {
 }
 
 // 响应数据data处理，将返回数据统一处理成json格式进行返回
-export function transforResponse(data: any): any {
+export function transformResponse(data: any): any {
   if (typeof data === 'string') {
     try {
       data = JSON.parse(data)
