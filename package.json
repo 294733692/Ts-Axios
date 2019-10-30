@@ -51,7 +51,7 @@
       ".(ts|tsx)": "ts-jest"
     },
     "testEnvironment": "jsdom",
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts)$",
+    "testRegex": "/test/.*\\.(test|spec)\\.(ts)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -92,6 +92,7 @@
     "@types/jest": "^24.0.20",
     "@types/node": "^10.11.0",
     "@types/nprogress": "0.0.29",
+    "@types/jasmine-ajax": "^3.3.0",
     "colors": "^1.3.2",
     "commitizen": "^3.0.0",
     "coveralls": "^3.0.2",
@@ -129,7 +130,9 @@
     "tslint-loader": "^3.5.4",
     "express": "^4.16.4",
     "body-parser": "^1.18.3",
-    "nprogress": "^0.2.0"
+    "nprogress": "^0.2.0",
+    "jasmine-ajax": "^4.0.0",
+    "jasmine-core": "^3.5.0"
   },
   "dependencies": {
     "@types/qs": "^6.5.3",

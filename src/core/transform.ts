@@ -3,7 +3,7 @@ import { AxiosTransformer } from '../types'
 export default function transform(
   data: any,
   headers: any,
-  fns: AxiosTransformer | AxiosTransformer[]
+  fns?: AxiosTransformer | AxiosTransformer[]
 ): any {
   if (!fns) {
     return data

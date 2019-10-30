@@ -53,11 +53,12 @@ export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {}
 
 // 扩展Error接口
 export interface AxiosError extends Error {
-  isAxiosError: boolean
   config: AxiosRequestConfig
   code?: string | null
   request?: any
   response?: AxiosResponse
+
+  isAxiosError: boolean
 }
 
 // axios公共方法，扩展接口类型
@@ -78,11 +79,11 @@ export interface Axios {
 
   options<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
 
-  post<T = any>(url: string, data: any, config?: AxiosRequestConfig): AxiosPromise<T>
+  post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
 
-  put<T = any>(url: string, data: any, config?: AxiosRequestConfig): AxiosPromise<T>
+  put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
 
-  patch<T = any>(url: string, data: any, config?: AxiosRequestConfig): AxiosPromise<T>
+  patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
 
   getUrl(config?: AxiosRequestConfig): string
 }

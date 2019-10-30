@@ -85,7 +85,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
       // 请求超时时间,回调函数
       request.ontimeout = function handleTime() {
-        reject(createError(`Timout of ${timeout} ms exceeded`, config, 'ECONNABORTED', request))
+        reject(createError(`Timeout of ${timeout} ms exceeded`, config, 'ECONNABORTED', request))
       }
 
       // 下载文件进度监控
