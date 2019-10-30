@@ -109,7 +109,7 @@ export default class Axios {
     return this._requestMethodWithData('put', url, data, config)
   }
 
-  getUrl(config: AxiosRequestConfig): string {
+  getUri(config: AxiosRequestConfig): string {
     config = mergeConfig(this.defaults, config)
 
     return transformURL(config)

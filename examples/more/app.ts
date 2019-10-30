@@ -180,4 +180,4 @@ const fakeConfig = {
     testString: 'thisIsATest'
   }
 }
-console.log(axios.getUrl(fakeConfig))
+console.log(axios.getUri(fakeConfig))

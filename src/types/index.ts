@@ -85,7 +85,7 @@ export interface Axios {
 
   patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
 
-  getUrl(config?: AxiosRequestConfig): string
+  getUri(config?: AxiosRequestConfig): string
 }
 
 // 混合对象类型接口
