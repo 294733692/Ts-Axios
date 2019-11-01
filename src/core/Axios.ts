@@ -81,6 +81,8 @@ export default class Axios {
     return promise
   }
 
+  // method方法
+
   get(url: string, config: AxiosRequestConfig): AxiosPromise {
     return this._requestMethodWithoutData('get', url, config)
   }

@@ -1,6 +1,6 @@
 {
-  "name": "TypeScript-Axoios",
-  "version": "1.3.0",
+  "name": "TypeScript-Axios",
+  "version": "1.2.0",
   "description": "",
   "keywords": [],
   "main": "dist/ts-axios.umd.js",
